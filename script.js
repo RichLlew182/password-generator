@@ -10,8 +10,8 @@ var lowerCasedCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k
 // Array of uppercase characters to be included in password
 var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-const charOptions = [];
-const generatedPassword = '';
+var charOptions = [];
+var generatedPassword = '';
 // TODO You can store the generatedPassword as a string and concat each character OR
 // TODO as an array and push each character, then join once you have enough characters
 
@@ -79,8 +79,18 @@ For example @ % + # $ etc`);
 
 
   // TODO Once they select a character set:
-  // TODO Generate a random character for each selected character set
-  // TODO Either push selected character sets to a mega-array of all selected characters
+  // TODO Generate a random character for each selected character set and add this to the generated password
+
+  if (confirmSpecChars) {
+
+  } else {
+    generatedPassword = generatedPassword;
+  }
+
+
+
+
+  // TODO Then Either push selected character sets to a mega-array of all selected characters
   // TODO OR you can keep the arrays separate and generate a random number to select the array and another to select the index
 
   // TODO Once character sets are selected, move on to generating random characters
@@ -93,7 +103,10 @@ getPasswordOptions()
 function getRandom(arr) {
 
   // TODO Need a variable to hold the password as it's being generated
+
+
   // TODO Need a variable to hold the index that's being generated
+
 
   // TODO For loop that loops the number of times that matches the length the user chose
   // TODO Generate a random number
