@@ -24,19 +24,36 @@ function getPasswordOptions() {
 
   var userPasswordLength = prompt(`Let's Generate a password. Please input a number between 8 and 128.`);
 
-  // At least 8 characters, no more than 128 characters
-  // Conditional to check that the number that was entered is in range
+  alert(typeof userPasswordLength);
 
-  if (userPasswordLength < 8 || userPasswordLength > 128) {
-    alert('Try Again');
+  var typedNumbers = function (userPasswordLength) {
+    return /^[0-9]*$/.test(userPasswordLength);
+  }
+
+  console.log(typedNumbers(userPasswordLength));
+
+  if (!typedNumbers(userPasswordLength)) {
+    alert(`You didn't type a number!`)
     getPasswordOptions()
   }
 
-  console.log(userPasswordLength)
-  // TODO Prompts store data as strings, so need to parse into a number
+  // Prompts store data as strings, so need to parse into a number
 
   userPasswordLength = parseInt(userPasswordLength)
   console.log(userPasswordLength)
+  alert(typeof userPasswordLength);
+
+  // At least 8 characters, no more than 128 characters
+  // Conditional to check that the number that was entered is in range
+
+  if (userPasswordLength < 8) {
+    alert('Too short! Try Again');
+    getPasswordOptions()
+  } else if (userPasswordLength > 128) {
+    alert('Too long! Try Again');
+    getPasswordOptions()
+  }
+
 
   // TODO If the user's input is out of range, either return out of the function or call the function again
 
