@@ -81,6 +81,13 @@ For example @ % + # $ etc`);
   // TODO Once they select a character set:
   // TODO Generate a random character for each selected character set and add this to the generated password
 
+  randomSpecCharInt = Math.floor(Math.random() * specialCharacters.length);
+  console.log(randomSpecCharInt);
+  randomSpecChar = specialCharacters[randomSpecCharInt];
+  console.log(randomSpecChar);
+
+
+
   if (confirmSpecChars) {
 
   } else {
