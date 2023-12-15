@@ -15,12 +15,22 @@ const generatedPassword = '';
 // TODO You can store the generatedPassword as a string and concat each character OR
 // TODO as an array and push each character, then join once you have enough characters
 
+
+
 // Function to prompt user for password options
 function getPasswordOptions() {
 
-  // TODO Prompt for password length
-  // TODO At least 8 characters, no more than 128 characters
-  // TODO Conditional to check that the number that was entered is in range
+  // Prompt for password length
+
+  var userPasswordLength = prompt(`Let's Generate a password. Please input a number between 8 and 128.`);
+
+  // At least 8 characters, no more than 128 characters
+  // Conditional to check that the number that was entered is in range
+
+  if (userPasswordLength < 8 || userPasswordLength > 128) {
+    alert('Try Again');
+    getPasswordOptions()
+  }
   // TODO Prompts store data as strings, so need to parse into a number
   // TODO If the user's input is out of range, either return out of the function or call the function again
 
@@ -32,6 +42,8 @@ function getPasswordOptions() {
   // TODO Once character sets are selected, move on to generating random characters
 
 }
+
+getPasswordOptions()
 
 // Function for getting a random element from an array
 function getRandom(arr) {
