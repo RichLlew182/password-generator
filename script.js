@@ -31,7 +31,13 @@ function getPasswordOptions() {
     alert('Try Again');
     getPasswordOptions()
   }
+
+  console.log(userPasswordLength)
   // TODO Prompts store data as strings, so need to parse into a number
+
+  userPasswordLength = parseInt(userPasswordLength)
+  console.log(userPasswordLength)
+
   // TODO If the user's input is out of range, either return out of the function or call the function again
 
   // TODO Once they select a character set:
