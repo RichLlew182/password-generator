@@ -59,10 +59,23 @@ function getPasswordOptions() {
 
   // TODO Prompt User for Character Sets
 
-  // TODO Confirm if user wants to use Special Characters
-  // TODO Confirm if user wants to use Numbers
-  // TODO Confirm if user wants to use Lower Case Characters
-  // TODO Confirm if user wants to use Upper Case Characters
+  // Confirm if user wants to use Special Characters
+
+  var confirmSpecChars = confirm(`Do you want to use Special Characters in your Password? 
+  
+For example @ % + # $ etc`);
+
+  // Confirm if user wants to use Numbers
+
+  var confirmNums = confirm(`Do you want to use Numbers in your Password?`);
+
+  // Confirm if user wants to use Lower Case Characters
+
+  var confirmLowerCase = confirm(`Do you want to use Lower Case Characters in your Password?`)
+
+  // Confirm if user wants to use Upper Case Characters
+
+  var confirmUpperCase = confirm(`Do you want to use Uppser Case Characters in your Password?`)
 
 
   // TODO Once they select a character set:
