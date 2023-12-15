@@ -24,7 +24,7 @@ function getPasswordOptions() {
 
   var userPasswordLength = prompt(`Let's Generate a password. Please input a number between 8 and 128.`);
 
-  alert(typeof userPasswordLength);
+  // alert(typeof userPasswordLength);
 
   var typedNumbers = function (userPasswordLength) {
     return /^[0-9]*$/.test(userPasswordLength);
@@ -41,21 +41,29 @@ function getPasswordOptions() {
 
   userPasswordLength = parseInt(userPasswordLength)
   console.log(userPasswordLength)
-  alert(typeof userPasswordLength);
+  // alert(typeof userPasswordLength);
 
   // At least 8 characters, no more than 128 characters
   // Conditional to check that the number that was entered is in range
 
   if (userPasswordLength < 8) {
+
     alert('Too short! Try Again');
+    // If the user's input is out of range, either return out of the function or call the function again
     getPasswordOptions()
   } else if (userPasswordLength > 128) {
     alert('Too long! Try Again');
+    // If the user's input is out of range, either return out of the function or call the function again
     getPasswordOptions()
   }
 
+  // TODO Prompt User for Character Sets
 
-  // TODO If the user's input is out of range, either return out of the function or call the function again
+  // TODO Confirm if user wants to use Special Characters
+  // TODO Confirm if user wants to use Numbers
+  // TODO Confirm if user wants to use Lower Case Characters
+  // TODO Confirm if user wants to use Upper Case Characters
+
 
   // TODO Once they select a character set:
   // TODO Generate a random character for each selected character set
