@@ -24,12 +24,15 @@ function getPasswordOptions() {
 
   charOptions = [];
   generatedPassword = '';
+  console.clear();
 
   // Prompt for password length
 
   var userPasswordLengthLocal = prompt(`Let's generate a password. Please input a number between 8 and 128.`);
 
-  if (!userPasswordLengthLocal) {
+  if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
+    console.log(`The user entered "${userPasswordLengthLocal}"`)
+    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`)
     alert('Oops. Try again!');
     getPasswordOptions()
   } else {
@@ -38,18 +41,21 @@ function getPasswordOptions() {
     }
 
     if (!typedNumbers(userPasswordLengthLocal)) {
-      alert(`You didn't type a number!`)
+      alert(`You didn't type a number!`);
       getPasswordOptions()
     } else if (userPasswordLengthLocal === '') {
       alert(`You didn't type anything!`);
       getPasswordOptions()
     } else {
 
+      console.log(`The user entered "${userPasswordLengthLocal}"`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`)
+
       // Prompts store data as strings, so need to parse into a number
 
       userPasswordLengthLocal = parseInt(userPasswordLengthLocal);
       console.log(userPasswordLengthLocal);
-      console.log(typeof userPasswordLengthLocal);
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`);
       userPasswordLengthGlobal = userPasswordLengthLocal;
       // alert(typeof userPasswordLength);
     }
@@ -62,6 +68,8 @@ function getPasswordOptions() {
       // If the user's input is out of range, either return out of the function or call the function again
       getPasswordOptions()
     } else {
+
+      console.log(`The user entry is between 8 and 128`)
 
       //  Prompt User for Character Sets
 
