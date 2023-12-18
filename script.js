@@ -57,7 +57,7 @@ function getPasswordOptions() {
     getPasswordOptions()
   }
 
-  // TODO Prompt User for Character Sets
+  //  Prompt User for Character Sets
 
   // Confirm if user wants to use Special Characters
 
@@ -86,18 +86,39 @@ For example @ % + # $ etc`);
   randomSpecChar = specialCharacters[randomSpecCharInt];
   console.log(randomSpecChar);
 
+  randomNumCharInt = Math.floor(Math.random() * numericCharacters.length);
+  console.log(randomSpecCharInt);
+  randomNumChar = numericCharacters[randomNumCharInt];
+  console.log(randomNumChar);
 
+
+  // TODO Then Either push selected character sets to a mega-array of all selected characters
 
   if (confirmSpecChars) {
+    generatedPassword += randomSpecChar;
+    console.log(`The password so far is ${generatedPassword}`);
+    charOptions = charOptions.concat(specialCharacters);
+    console.log(`The Character Options so far are ${charOptions}`);
 
   } else {
     generatedPassword = generatedPassword;
+    charOptions = charOptions;
+  }
+
+  if (confirmNums) {
+    generatedPassword += randomNumChar;
+    console.log(`The password so far is ${generatedPassword}`);
+    charOptions = charOptions.concat(numericCharacters);
+    console.log(`The Character Options so far are ${charOptions}`);
+
+  } else {
+    generatedPassword = generatedPassword;
+    charOptions = charOptions;
   }
 
 
 
 
-  // TODO Then Either push selected character sets to a mega-array of all selected characters
   // TODO OR you can keep the arrays separate and generate a random number to select the array and another to select the index
 
   // TODO Once character sets are selected, move on to generating random characters
