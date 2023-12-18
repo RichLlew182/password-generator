@@ -77,7 +77,7 @@ For example @ % + # $ etc`);
 
   // Confirm if user wants to use Upper Case Characters
 
-  var confirmUpperCase = confirm(`Do you want to use Uppser Case Characters in your Password?`)
+  var confirmUpperCase = confirm(`Do you want to use Upper Case Characters in your Password?`)
 
 
   // TODO Once they select a character set:
@@ -113,7 +113,7 @@ For example @ % + # $ etc`);
     console.log(`The Character Options so far are ${charOptions}`);
     userPasswordLengthGlobal--;
     console.log(`The User password length is ${userPasswordLengthGlobal}`)
-  } else {
+  } else if (!confirmSpecChars) {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
   }
@@ -125,7 +125,7 @@ For example @ % + # $ etc`);
     console.log(`The Character Options so far are ${charOptions}`);
     userPasswordLengthGlobal--;
     console.log(`The User password length is ${userPasswordLengthGlobal}`);
-  } else {
+  } else if (!confirmNums) {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
   }
@@ -137,7 +137,7 @@ For example @ % + # $ etc`);
     console.log(`The Character Options so far are ${charOptions}`);
     userPasswordLengthGlobal--;
     console.log(`The User password length is ${userPasswordLengthGlobal}`)
-  } else {
+  } else if (!confirmLowerCase) {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
   }
@@ -149,7 +149,7 @@ For example @ % + # $ etc`);
     console.log(`The Character Options so far are ${charOptions}`);
     userPasswordLengthGlobal--;
     console.log(`The User password length is ${userPasswordLengthGlobal}`)
-  } else {
+  } else if (!confirmUpperCase) {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
   }
