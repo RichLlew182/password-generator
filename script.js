@@ -163,9 +163,6 @@ For example @ % + # $ etc`);
 
 }
 
-getPasswordOptions();
-
-var randomMegaIntGlobal;
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -203,6 +200,8 @@ function getRandom(arr) {
 // Function to generate password with user input
 function generatePassword() {
 
+  getPasswordOptions()
+
   for (let i = 0; i < userPasswordLengthGlobal; i++) {
     console.log(`The User password length is ${userPasswordLengthGlobal}`)
     getRandom(charOptions);
@@ -226,8 +225,6 @@ function writePassword() {
 
   passwordText.value = password;
 }
-
-writePassword()
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
