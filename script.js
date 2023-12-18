@@ -26,6 +26,9 @@ function getPasswordOptions() {
   generatedPassword = '';
   console.clear();
 
+  // userPasswordLengthGlobal = '';
+  // console.log(`The user entry has now been reset to a ${typeof userPasswordLengthGlobal}.`);
+
   // Prompt for password length
 
   var userPasswordLengthLocal = prompt(`Let's generate a password. Please input a number between 8 and 128.`);
@@ -67,111 +70,107 @@ function getPasswordOptions() {
     // If the user's input is out of range, either return out of the function or call the function again
     getPasswordOptions()
   } else if (userPasswordLengthGlobal >= 8 || userPasswordLengthGlobal <= 128) {
-    console.log(`The user entry is between 8 and 128 so we can continue.`);
-    confirmCharacters();
+    console.log(`The user entry is between 8 and 128 so we can continue.`)
 
 
     //  Prompt User for Character Sets
 
-    function confirmCharacters() {
+    // Confirm if user wants to use Special Characters
 
-      // Confirm if user wants to use Special Characters
-
-      var confirmSpecChars = confirm(`Do you want to use Special Characters in your Password? 
+    var confirmSpecChars = confirm(`Do you want to use Special Characters in your Password? 
   
   For example @ % + # $ etc`);
 
-      if (!confirmSpecChars) {
-        console.log('Password has no Special Characters');
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      } else {
-        console.log('Password includes Special Characters');
-        randomSpecCharInt = Math.floor(Math.random() * specialCharacters.length);
-        console.log(`Random Special Character Int: ${randomSpecCharInt}`);
-        randomSpecChar = specialCharacters[randomSpecCharInt];
-        console.log(randomSpecChar);
-        generatedPassword += randomSpecChar;
-        console.log(`The password so far is ${generatedPassword}`);
-        charOptions = charOptions.concat(specialCharacters);
-        console.log(`The Character Options so far are ${charOptions}`);
-        userPasswordLengthGlobal--;
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`)
-        console.log('----------------------------------------')
-      }
+    if (!confirmSpecChars) {
+      console.log('Password has no Special Characters');
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+    } else {
+      console.log('Password includes Special Characters');
+      randomSpecCharInt = Math.floor(Math.random() * specialCharacters.length);
+      console.log(`Random Special Character Int: ${randomSpecCharInt}`);
+      randomSpecChar = specialCharacters[randomSpecCharInt];
+      console.log(randomSpecChar);
+      generatedPassword += randomSpecChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(specialCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      userPasswordLengthGlobal--;
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`)
+      console.log('----------------------------------------')
+    }
 
-      // Confirm if user wants to use Numbers
+    // Confirm if user wants to use Numbers
 
-      //  Once they select a character set:
-      //  Generate a random character for each selected character set and add this to the generated password
+    //  Once they select a character set:
+    //  Generate a random character for each selected character set and add this to the generated password
 
-      var confirmNums = confirm(`Do you want to use Numbers in your Password?`);
+    var confirmNums = confirm(`Do you want to use Numbers in your Password?`);
 
-      if (!confirmNums) {
-        console.log('Password has no Numbers')
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      } else {
-        console.log('Password includes Numbers');
-        randomNumCharInt = Math.floor(Math.random() * numericCharacters.length);
-        console.log(`Random Number Int: ${randomNumCharInt}`);
-        randomNumChar = numericCharacters[randomNumCharInt];
-        console.log(randomNumChar);
-        generatedPassword += randomNumChar;
-        console.log(`The password so far is ${generatedPassword}`);
-        charOptions = charOptions.concat(numericCharacters);
-        console.log(`The Character Options so far are ${charOptions}`);
-        userPasswordLengthGlobal--;
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-        console.log('----------------------------------------')
-      }
-      // Confirm if user wants to use Lower Case Characters
+    if (!confirmNums) {
+      console.log('Password has no Numbers')
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+    } else {
+      console.log('Password includes Numbers');
+      randomNumCharInt = Math.floor(Math.random() * numericCharacters.length);
+      console.log(`Random Number Int: ${randomNumCharInt}`);
+      randomNumChar = numericCharacters[randomNumCharInt];
+      console.log(randomNumChar);
+      generatedPassword += randomNumChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(numericCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      userPasswordLengthGlobal--;
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('----------------------------------------')
+    }
+    // Confirm if user wants to use Lower Case Characters
 
-      var confirmLowerCase = confirm(`Do you want to use Lower Case Characters in your Password?`)
+    var confirmLowerCase = confirm(`Do you want to use Lower Case Characters in your Password?`)
 
-      if (!confirmLowerCase) {
-        console.log('Password has no Lower Case characters');
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      } else {
-        console.log('Password includes Lower Case characters');
-        randomLowerCaseCharInt = Math.floor(Math.random() * lowerCasedCharacters.length);
-        console.log(`Random Lower Case Int: ${randomLowerCaseCharInt}`);
-        randomLowerCaseChar = lowerCasedCharacters[randomLowerCaseCharInt];
-        console.log(randomLowerCaseChar);
-        generatedPassword += randomLowerCaseChar;
-        console.log(`The password so far is ${generatedPassword}`);
-        charOptions = charOptions.concat(lowerCasedCharacters);
-        console.log(`The Character Options so far are ${charOptions}`);
-        userPasswordLengthGlobal--;
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-        console.log('----------------------------------------')
-      }
+    if (!confirmLowerCase) {
+      console.log('Password has no Lower Case characters');
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+    } else {
+      console.log('Password includes Lower Case characters');
+      randomLowerCaseCharInt = Math.floor(Math.random() * lowerCasedCharacters.length);
+      console.log(`Random Lower Case Int: ${randomLowerCaseCharInt}`);
+      randomLowerCaseChar = lowerCasedCharacters[randomLowerCaseCharInt];
+      console.log(randomLowerCaseChar);
+      generatedPassword += randomLowerCaseChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(lowerCasedCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      userPasswordLengthGlobal--;
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('----------------------------------------')
+    }
 
-      // Confirm if user wants to use Upper Case Characters
+    // Confirm if user wants to use Upper Case Characters
 
-      var confirmUpperCase = confirm(`Do you want to use Upper Case Characters in your Password?`)
+    var confirmUpperCase = confirm(`Do you want to use Upper Case Characters in your Password?`)
 
-      if (!confirmUpperCase) {
-        console.log('Password has no Upper Case characters');
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      } else {
-        console.log('Password includes Upper Case characters');
-        randomUpperCaseCharInt = Math.floor(Math.random() * upperCasedCharacters.length);
-        console.log(`Random Upper Case Int: ${randomUpperCaseCharInt}`);
-        randomUpperCaseChar = upperCasedCharacters[randomUpperCaseCharInt];
-        console.log(randomUpperCaseChar);
-        generatedPassword += randomUpperCaseChar;
-        console.log(`The password so far is ${generatedPassword}`);
-        charOptions = charOptions.concat(upperCasedCharacters);
-        console.log(`The Character Options so far are ${charOptions}`);
-        userPasswordLengthGlobal--;
-        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-        console.log('----------------------------------------')
-      }
+    if (!confirmUpperCase) {
+      console.log('Password has no Upper Case characters');
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+    } else {
+      console.log('Password includes Upper Case characters');
+      randomUpperCaseCharInt = Math.floor(Math.random() * upperCasedCharacters.length);
+      console.log(`Random Upper Case Int: ${randomUpperCaseCharInt}`);
+      randomUpperCaseChar = upperCasedCharacters[randomUpperCaseCharInt];
+      console.log(randomUpperCaseChar);
+      generatedPassword += randomUpperCaseChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(upperCasedCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      userPasswordLengthGlobal--;
+      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('----------------------------------------')
+    }
 
-      if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
-        console.log('User has not selected anything. They need to start again.');
-        alert('You need to select at least one character set to proceed.')
-        confirmCharacters();
-      }
+    if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
+      console.log('User has not selected anything. They need to start again.');
+      alert('You need to select at least one character set to proceed.')
+      getPasswordOptions();
     }
 
   }
