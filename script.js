@@ -91,6 +91,16 @@ For example @ % + # $ etc`);
   randomNumChar = numericCharacters[randomNumCharInt];
   console.log(randomNumChar);
 
+  randomLowerCaseCharInt = Math.floor(Math.random() * lowerCasedCharacters.length);
+  console.log(randomSpecCharInt);
+  randomLowerCaseChar = lowerCasedCharacters[randomLowerCaseCharInt];
+  console.log(randomLowerCaseChar);
+
+  randomUpperCaseCharInt = Math.floor(Math.random() * upperCasedCharacters.length);
+  console.log(randomSpecCharInt);
+  randomUpperCaseChar = upperCasedCharacters[randomUpperCaseCharInt];
+  console.log(randomUpperCaseChar);
+
 
   // TODO Then Either push selected character sets to a mega-array of all selected characters
 
@@ -100,21 +110,30 @@ For example @ % + # $ etc`);
     charOptions = charOptions.concat(specialCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
 
-  } else {
-    generatedPassword = generatedPassword;
-    charOptions = charOptions;
-  }
-
-  if (confirmNums) {
+  } else if (confirmNums) {
     generatedPassword += randomNumChar;
     console.log(`The password so far is ${generatedPassword}`);
     charOptions = charOptions.concat(numericCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
 
+  } else if (confirmLowerCase) {
+    generatedPassword += randomLowerCaseChar;
+    console.log(`The password so far is ${generatedPassword}`);
+    charOptions = charOptions.concat(lowerCasedCharacters);
+    console.log(`The Character Options so far are ${charOptions}`);
+  } else if (confirmUpperCase) {
+    generatedPassword += randomUpperCaseChar;
+    console.log(`The password so far is ${generatedPassword}`);
+    charOptions = charOptions.concat(upperCasedCharacters);
+    console.log(`The Character Options so far are ${charOptions}`);
   } else {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
+    alert('You need to select at least one Character set');
+    getPasswordOptions();
   }
+
+
 
 
 
