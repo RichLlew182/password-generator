@@ -32,7 +32,7 @@ function getPasswordOptions() {
 
   if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
     console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`)
+    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
     alert('Oops. Try again!');
     getPasswordOptions()
   } else {
@@ -41,21 +41,23 @@ function getPasswordOptions() {
     }
 
     if (!typedNumbers(userPasswordLengthLocal)) {
-      alert(`You didn't type a number!`);
+      console.log(`The user entered "${userPasswordLengthLocal}"`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
+      alert(`You didn't type a number! Try again.`);
       getPasswordOptions()
     } else if (userPasswordLengthLocal === '') {
-      alert(`You didn't type anything!`);
+      alert(`You didn't type anything! Try again.`);
       getPasswordOptions()
     } else {
 
       console.log(`The user entered "${userPasswordLengthLocal}"`)
-      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which needs to be convereted to a number`)
 
       // Prompts store data as strings, so need to parse into a number
 
       userPasswordLengthLocal = parseInt(userPasswordLengthLocal);
       console.log(userPasswordLengthLocal);
-      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal}`);
+      console.log(`The user entry is now a type of ${typeof userPasswordLengthLocal} which is accepted.`);
       userPasswordLengthGlobal = userPasswordLengthLocal;
       // alert(typeof userPasswordLength);
     }
@@ -64,12 +66,13 @@ function getPasswordOptions() {
     // Conditional to check that the number that was entered is in range
 
     if (userPasswordLengthGlobal < 8 || userPasswordLengthGlobal > 128) {
+      console.log(`The user entry is not between 8 and 128 so they need to start again.`)
       alert('Needs to be between 8 and 128, please try again');
       // If the user's input is out of range, either return out of the function or call the function again
       getPasswordOptions()
     } else {
 
-      console.log(`The user entry is between 8 and 128`)
+      console.log(`The user entry is between 8 and 128 so we can continue.`)
 
       //  Prompt User for Character Sets
 
@@ -80,8 +83,10 @@ function getPasswordOptions() {
   For example @ % + # $ etc`);
 
       if (!confirmSpecChars) {
-        console.log('Password has no Special Characters')
+        console.log('Password has no Special Characters');
+        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
       } else {
+        console.log('Password includes Special Characters');
         randomSpecCharInt = Math.floor(Math.random() * specialCharacters.length);
         console.log(`Random Special Character Int: ${randomSpecCharInt}`);
         randomSpecChar = specialCharacters[randomSpecCharInt];
@@ -104,7 +109,9 @@ function getPasswordOptions() {
 
       if (!confirmNums) {
         console.log('Password has no Numbers')
+        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
       } else {
+        console.log('Password includes Numbers');
         randomNumCharInt = Math.floor(Math.random() * numericCharacters.length);
         console.log(`Random Number Int: ${randomNumCharInt}`);
         randomNumChar = numericCharacters[randomNumCharInt];
@@ -122,8 +129,10 @@ function getPasswordOptions() {
       var confirmLowerCase = confirm(`Do you want to use Lower Case Characters in your Password?`)
 
       if (!confirmLowerCase) {
-        console.log('Password has no Lower Case characters')
+        console.log('Password has no Lower Case characters');
+        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
       } else {
+        console.log('Password includes Lower Case characters');
         randomLowerCaseCharInt = Math.floor(Math.random() * lowerCasedCharacters.length);
         console.log(`Random Lower Case Int: ${randomLowerCaseCharInt}`);
         randomLowerCaseChar = lowerCasedCharacters[randomLowerCaseCharInt];
@@ -142,8 +151,10 @@ function getPasswordOptions() {
       var confirmUpperCase = confirm(`Do you want to use Upper Case Characters in your Password?`)
 
       if (!confirmUpperCase) {
-        console.log('Password has no Upper Case characters')
+        console.log('Password has no Upper Case characters');
+        console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
       } else {
+        console.log('Password includes Upper Case characters');
         randomUpperCaseCharInt = Math.floor(Math.random() * upperCasedCharacters.length);
         console.log(`Random Upper Case Int: ${randomUpperCaseCharInt}`);
         randomUpperCaseChar = upperCasedCharacters[randomUpperCaseCharInt];
@@ -158,6 +169,12 @@ function getPasswordOptions() {
       }
     }
     // TODO need an else statement for if no characters are selected and if so start the function over
+
+    if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
+      console.log('User has not selected anything. They need to start again.');
+      alert('You need to select at least one character set to proceed.')
+      getPasswordOptions();
+    }
 
     //  Then Either push selected character sets to a mega-array of all selected characters
 
