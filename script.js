@@ -15,43 +15,45 @@ var generatedPassword = '';
 // TODO You can store the generatedPassword as a string and concat each character OR
 // TODO as an array and push each character, then join once you have enough characters
 
-
+var userPasswordLengthGlobal;
 
 // Function to prompt user for password options
 function getPasswordOptions() {
 
   // Prompt for password length
 
-  var userPasswordLength = prompt(`Let's Generate a password. Please input a number between 8 and 128.`);
+  var userPasswordLengthLocal = prompt(`Let's Generate a password. Please input a number between 8 and 128.`);
+  userPasswordLengthGlobal = userPasswordLengthLocal;
+  console.log(`The password length is ${userPasswordLengthGlobal}`)
 
   // alert(typeof userPasswordLength);
 
-  var typedNumbers = function (userPasswordLength) {
-    return /^[0-9]*$/.test(userPasswordLength);
+  var typedNumbers = function (userPasswordLengthLocal) {
+    return /^[0-9]*$/.test(userPasswordLengthLocal);
   }
 
-  console.log(typedNumbers(userPasswordLength));
+  console.log(typedNumbers(userPasswordLengthLocal));
 
-  if (!typedNumbers(userPasswordLength)) {
+  if (!typedNumbers(userPasswordLengthLocal)) {
     alert(`You didn't type a number!`)
     getPasswordOptions()
   }
 
   // Prompts store data as strings, so need to parse into a number
 
-  userPasswordLength = parseInt(userPasswordLength)
-  console.log(userPasswordLength)
+  userPasswordLengthLocal = parseInt(userPasswordLengthLocal)
+  console.log(userPasswordLengthLocal)
   // alert(typeof userPasswordLength);
 
   // At least 8 characters, no more than 128 characters
   // Conditional to check that the number that was entered is in range
 
-  if (userPasswordLength < 8) {
+  if (userPasswordLengthLocal < 8) {
 
     alert('Too short! Try Again');
     // If the user's input is out of range, either return out of the function or call the function again
     getPasswordOptions()
-  } else if (userPasswordLength > 128) {
+  } else if (userPasswordLengthLocal > 128) {
     alert('Too long! Try Again');
     // If the user's input is out of range, either return out of the function or call the function again
     getPasswordOptions()
@@ -109,6 +111,8 @@ For example @ % + # $ etc`);
     console.log(`The password so far is ${generatedPassword}`);
     charOptions = charOptions.concat(specialCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
+    userPasswordLengthGlobal--;
+    console.log(`The User password length is ${userPasswordLengthGlobal}`)
   } else {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
@@ -119,6 +123,8 @@ For example @ % + # $ etc`);
     console.log(`The password so far is ${generatedPassword}`);
     charOptions = charOptions.concat(numericCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
+    userPasswordLengthGlobal--;
+    console.log(`The User password length is ${userPasswordLengthGlobal}`);
   } else {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
@@ -129,6 +135,8 @@ For example @ % + # $ etc`);
     console.log(`The password so far is ${generatedPassword}`);
     charOptions = charOptions.concat(lowerCasedCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
+    userPasswordLengthGlobal--;
+    console.log(`The User password length is ${userPasswordLengthGlobal}`)
   } else {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
@@ -139,26 +147,25 @@ For example @ % + # $ etc`);
     console.log(`The password so far is ${generatedPassword}`);
     charOptions = charOptions.concat(upperCasedCharacters);
     console.log(`The Character Options so far are ${charOptions}`);
+    userPasswordLengthGlobal--;
+    console.log(`The User password length is ${userPasswordLengthGlobal}`)
   } else {
     generatedPassword = generatedPassword;
     charOptions = charOptions;
   }
 
 
-
-
-
-
-
-
-
   // TODO OR you can keep the arrays separate and generate a random number to select the array and another to select the index
 
   // TODO Once character sets are selected, move on to generating random characters
 
+
+
 }
 
-getPasswordOptions()
+getPasswordOptions();
+
+var randomMegaIntGlobal;
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -167,20 +174,45 @@ function getRandom(arr) {
 
 
   // TODO Need a variable to hold the index that's being generated
+  // TODO Generate a random number
 
-
+  var randomMegaIntLocal = Math.floor(Math.random() * arr.length);
+  // console.log(randomMegaIntLocal);
 
   // TODO For loop that loops the number of times that matches the length the user chose
-  // TODO Generate a random number
+
+  // for (i = 0; i < userPasswordLengthGlobal; i++) {
+  //   console.log(arr[randomMegaIntLocal])
+  // }
+
+
   // TODO That number is the index for a character in the mega-array
   // TODO So then, mega-array[generated-index] is the actual character
   // TODO Add that character to the password
   // TODO Once we finish the for loop, return the generated password
 
+  randomMegaIntGlobal = randomMegaIntLocal;
+  return randomMegaIntLocal
+
 }
+
+// getRandom(charOptions);
+// console.log(randomMegaIntGlobal);
+// console.log(`The password so far is ${generatedPassword}`);
 
 // Function to generate password with user input
 function generatePassword() {
+
+  for (let i = 0; i < userPasswordLengthGlobal; i++) {
+    console.log(`The User password length is ${userPasswordLengthGlobal}`)
+    getRandom(charOptions);
+    console.log(`The Get Random result is ${getRandom(charOptions)}`)
+    generatedPassword += charOptions[randomMegaIntGlobal];
+    console.log(`The password length is ${generatedPassword.length}`)
+  }
+  console.log(`The generated password is ${generatedPassword}`);
+  console.log(`The generated password length is ${generatedPassword.length} characters`);
+  return generatedPassword;
 
 }
 
@@ -194,6 +226,8 @@ function writePassword() {
 
   passwordText.value = password;
 }
+
+writePassword()
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
