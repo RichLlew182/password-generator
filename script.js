@@ -104,33 +104,67 @@ For example @ % + # $ etc`);
 
   // TODO Then Either push selected character sets to a mega-array of all selected characters
 
-  if (confirmSpecChars) {
-    generatedPassword += randomSpecChar;
-    console.log(`The password so far is ${generatedPassword}`);
-    charOptions = charOptions.concat(specialCharacters);
-    console.log(`The Character Options so far are ${charOptions}`);
+  // if (confirmSpecChars) {
+  //   generatedPassword += randomSpecChar;
+  //   console.log(`The password so far is ${generatedPassword}`);
+  //   charOptions = charOptions.concat(specialCharacters);
+  //   console.log(`The Character Options so far are ${charOptions}`);
 
-  } else if (confirmNums) {
-    generatedPassword += randomNumChar;
-    console.log(`The password so far is ${generatedPassword}`);
-    charOptions = charOptions.concat(numericCharacters);
-    console.log(`The Character Options so far are ${charOptions}`);
+  // } else if (confirmNums) {
+  //   generatedPassword += randomNumChar;
+  //   console.log(`The password so far is ${generatedPassword}`);
+  //   charOptions = charOptions.concat(numericCharacters);
+  //   console.log(`The Character Options so far are ${charOptions}`);
 
-  } else if (confirmLowerCase) {
-    generatedPassword += randomLowerCaseChar;
-    console.log(`The password so far is ${generatedPassword}`);
-    charOptions = charOptions.concat(lowerCasedCharacters);
-    console.log(`The Character Options so far are ${charOptions}`);
-  } else if (confirmUpperCase) {
-    generatedPassword += randomUpperCaseChar;
-    console.log(`The password so far is ${generatedPassword}`);
-    charOptions = charOptions.concat(upperCasedCharacters);
-    console.log(`The Character Options so far are ${charOptions}`);
-  } else {
-    generatedPassword = generatedPassword;
-    charOptions = charOptions;
-    alert('You need to select at least one Character set');
-    getPasswordOptions();
+  // } else if (confirmLowerCase) {
+  //   generatedPassword += randomLowerCaseChar;
+  //   console.log(`The password so far is ${generatedPassword}`);
+  //   charOptions = charOptions.concat(lowerCasedCharacters);
+  //   console.log(`The Character Options so far are ${charOptions}`);
+  // } else if (confirmUpperCase) {
+  //   generatedPassword += randomUpperCaseChar;
+  //   console.log(`The password so far is ${generatedPassword}`);
+  //   charOptions = charOptions.concat(upperCasedCharacters);
+  //   console.log(`The Character Options so far are ${charOptions}`);
+  // } else {
+  //   generatedPassword = generatedPassword;
+  //   charOptions = charOptions;
+  //   alert('You need to select at least one Character set');
+  //   getPasswordOptions();
+  // }
+
+  // Switch Statement 
+
+  switch (true) {
+    case confirmSpecChars:
+      generatedPassword += randomSpecChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(specialCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      break;
+    case confirmNums:
+      generatedPassword += randomNumChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(numericCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      break;
+    case confirmLowerCase:
+      generatedPassword += randomLowerCaseChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(lowerCasedCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      break;
+    case confirmUpperCase:
+      generatedPassword += randomUpperCaseChar;
+      console.log(`The password so far is ${generatedPassword}`);
+      charOptions = charOptions.concat(upperCasedCharacters);
+      console.log(`The Character Options so far are ${charOptions}`);
+      break;
+    default:
+      generatedPassword = generatedPassword;
+      charOptions = charOptions;
+      alert('You need to select at least one Character set');
+      getPasswordOptions();
   }
 
 
