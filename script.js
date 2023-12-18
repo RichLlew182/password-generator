@@ -15,7 +15,7 @@ var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K
 var charOptions;
 var generatedPassword;
 
-var userPasswordLengthGlobal;
+let userPasswordLengthGlobal = '';
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -35,46 +35,45 @@ function getPasswordOptions() {
     console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
     alert('Oops. Try again!');
     getPasswordOptions()
-  } else {
-    var typedNumbers = function (userPasswordLengthLocal) {
-      return /^[0-9]*$/.test(userPasswordLengthLocal);
-    }
+  }
 
-    if (!typedNumbers(userPasswordLengthLocal)) {
-      console.log(`The user entered "${userPasswordLengthLocal}"`)
-      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
-      alert(`You didn't type a number! Try again.`);
-      getPasswordOptions()
-    } else if (userPasswordLengthLocal === '') {
-      alert(`You didn't type anything! Try again.`);
-      getPasswordOptions()
-    } else {
 
-      console.log(`The user entered "${userPasswordLengthLocal}"`)
-      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which needs to be convereted to a number`)
+  var typedNumbers = function (userPasswordLengthLocal) {
+    return /^[0-9]*$/.test(userPasswordLengthLocal);
+  }
 
-      // Prompts store data as strings, so need to parse into a number
+  if (!typedNumbers(userPasswordLengthLocal)) {
+    console.log(`The user entered "${userPasswordLengthLocal}"`)
+    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
+    alert(`You didn't type a number! Try again.`);
+    getPasswordOptions()
+  } else if (typedNumbers) {
 
-      userPasswordLengthLocal = parseInt(userPasswordLengthLocal);
-      console.log(userPasswordLengthLocal);
-      console.log(`The user entry is now a type of ${typeof userPasswordLengthLocal} which is accepted.`);
-      userPasswordLengthGlobal = userPasswordLengthLocal;
-      // alert(typeof userPasswordLength);
-    }
+    // Prompts store data as strings, so need to parse into a number
+
+    userPasswordLengthLocal = parseInt(userPasswordLengthLocal);
+    console.log(userPasswordLengthLocal);
+    console.log(`The user entry is now a type of ${typeof userPasswordLengthLocal} which is accepted.`);
+    userPasswordLengthGlobal = userPasswordLengthLocal;
+    // alert(typeof userPasswordLength);
 
     // At least 8 characters, no more than 128 characters
     // Conditional to check that the number that was entered is in range
+  }
 
-    if (userPasswordLengthGlobal < 8 || userPasswordLengthGlobal > 128) {
-      console.log(`The user entry is not between 8 and 128 so they need to start again.`)
-      alert('Needs to be between 8 and 128, please try again');
-      // If the user's input is out of range, either return out of the function or call the function again
-      getPasswordOptions()
-    } else {
+  if (userPasswordLengthGlobal < 8 || userPasswordLengthGlobal > 128) {
+    console.log(`The user entry is not between 8 and 128 so they need to start again.`)
+    alert('Needs to be between 8 and 128, please try again');
+    // If the user's input is out of range, either return out of the function or call the function again
+    getPasswordOptions()
+  } else if (userPasswordLengthGlobal >= 8 || userPasswordLengthGlobal <= 128) {
+    console.log(`The user entry is between 8 and 128 so we can continue.`);
+    confirmCharacters();
 
-      console.log(`The user entry is between 8 and 128 so we can continue.`)
 
-      //  Prompt User for Character Sets
+    //  Prompt User for Character Sets
+
+    function confirmCharacters() {
 
       // Confirm if user wants to use Special Characters
 
@@ -167,19 +166,23 @@ function getPasswordOptions() {
         console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
         console.log('----------------------------------------')
       }
-    }
-    // TODO need an else statement for if no characters are selected and if so start the function over
 
-    if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
-      console.log('User has not selected anything. They need to start again.');
-      alert('You need to select at least one character set to proceed.')
-      getPasswordOptions();
+      if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
+        console.log('User has not selected anything. They need to start again.');
+        alert('You need to select at least one character set to proceed.')
+        confirmCharacters();
+      }
     }
-
-    //  Then Either push selected character sets to a mega-array of all selected characters
 
   }
+
 }
+
+
+
+// TODO need an else statement for if no characters are selected and if so start the function over
+
+//  Then Either push selected character sets to a mega-array of all selected characters
 
 var randomMegaIntGlobal;
 
