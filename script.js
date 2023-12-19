@@ -39,8 +39,13 @@ function getPasswordOptions() {
   if (isNaN(parseInt(userPasswordLengthLocal))) {
     validate();
 
-  } else if (!isNaN(parseInt(userPasswordLengthLocal))) {
-    confirmRange();
+  } else if (!isNaN(parseInt(userPasswordLengthLocal)) && userPasswordLengthLocal >= 8 && userPasswordLengthLocal <= 128) {
+    console.log(`User input can be parsed into a number, and is between 8 and 128, so we can proceed.`);
+    userPasswordLengthGlobal = parseInt(userPasswordLengthLocal);
+    confirmCharacterSets();
+  } else if (!isNaN(parseInt(userPasswordLengthLocal)) && userPasswordLengthLocal < 8 || userPasswordLengthLocal > 128) {
+    alert('Needs to be between 8 and 128, please try again');
+    getPasswordOptions();
   }
 
   function validate() {
@@ -58,7 +63,7 @@ function getPasswordOptions() {
     // Function to check if the user is actually typing numbers and not just letters
 
     var typedNumbers = function (userPasswordLengthLocal) {
-      return /^[0-9]*$/.test(userPasswordLengthLocal);
+      return /^[0-9]+$/.test(userPasswordLengthLocal);
     }
 
     // Conditional to check if the user has typed actual numbers and if not alert to try again, then restart the function. If numbers are typed then proceed to confirm range.
@@ -66,26 +71,12 @@ function getPasswordOptions() {
     if (!typedNumbers(userPasswordLengthLocal)) {
       alert(`You didn't type a number! Try again.`);
       getPasswordOptions();
-    } else if (typedNumbers(userPasswordLengthLocal)) {
-      confirmRange();
+    } else {
+      console.log('Valid Number')
     }
-
-  }
-
-  // Function to confirm whether the user input is between 8 and 128 Characters. If true proceed, if not start again.
-
-  function confirmRange() {
 
     // Prompts store data as strings, so need to parse into a number
 
-    userPasswordLengthGlobal = parseInt(userPasswordLengthLocal);
-
-    if (userPasswordLengthGlobal >= 8 && userPasswordLengthGlobal <= 128) {
-      confirmCharacterSets();
-    } else {
-      alert('Needs to be between 8 and 128, please try again');
-      getPasswordOptions()
-    }
   }
 
   //  Function to confirm Character Sets
