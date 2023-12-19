@@ -34,50 +34,59 @@ function getPasswordOptions() {
 
   var userPasswordLengthLocal = prompt(`Let's generate a password. Please input a number between 8 and 128.`);
 
-  // Check if a user just presses enter or cancel without typing in a number and restart if true
+  // Conditional to confirm that the user input is a number when using the parseInt function. If false, move on to validate function, if true, move on to confirmRange function.
 
-  if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
-    alert('Oops. Try again!');
-    getPasswordOptions()
-  }
+  if (isNaN(parseInt(userPasswordLengthLocal))) {
+    validate();
 
-  // Function to check if the user is actually typing numbers and not just letters
-
-  var typedNumbers = function (userPasswordLengthLocal) {
-    return /^[0-9]*$/.test(userPasswordLengthLocal);
-  }
-
-  // Conditional to check if the user has typed actual numbers and if not alert to try again, then restart the function. If numbers are typed then proceed
-
-  if (!typedNumbers(userPasswordLengthLocal)) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`);
-    alert(`You didn't type a number! Try again.`);
-    getPasswordOptions();
-  } else if (typedNumbers(userPasswordLengthLocal)) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which needs to be converted.`);
-
-    // Prompts store data as strings, so need to parse into a number
-
-    userPasswordLengthGlobal = parseInt(userPasswordLengthLocal);
-    console.log(userPasswordLengthGlobal);
-    console.log(`The user entry has now been convererted into a ${typeof userPasswordLengthGlobal} which is accepted.`);
-  }
-
-  // Conditional to confirm that the user input has been converted to a number. If true proceed, if not start again.
-
-  if (typeof userPasswordLengthGlobal === "number") {
+  } else if (!isNaN(parseInt(userPasswordLengthLocal))) {
     confirmRange();
-  } else {
-    getPasswordOptions();
+  }
+
+  function validate() {
+
+    // Check if a user just presses enter or cancel without typing in a number and restart if true
+    if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
+      console.log(`The user entered "${userPasswordLengthLocal}"`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
+      alert('Oops. Try again!');
+
+      // Reset input to empty string and restart function
+
+      userPasswordLengthLocal = ''
+      getPasswordOptions()
+    }
+
+    // Function to check if the user is actually typing numbers and not just letters
+
+    var typedNumbers = function (userPasswordLengthLocal) {
+      return /^[0-9]*$/.test(userPasswordLengthLocal);
+    }
+
+    // Conditional to check if the user has typed actual numbers and if not alert to try again, then restart the function. If numbers are typed then proceed
+
+    if (!typedNumbers(userPasswordLengthLocal)) {
+      console.log(`The user entered "${userPasswordLengthLocal}"`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`);
+      alert(`You didn't type a number! Try again.`);
+      getPasswordOptions();
+    } else if (typedNumbers(userPasswordLengthLocal)) {
+      console.log(`The user entered "${userPasswordLengthLocal}"`)
+      console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which needs to be converted.`);
+    }
+
   }
 
   // Function to confirm whether the user input is between 8 and 128 Characters. If true proceed, if not start again.
 
   function confirmRange() {
+
+    // Prompts store data as strings, so need to parse into a number
+
+    userPasswordLengthGlobal = parseInt(userPasswordLengthLocal);
+    console.log(userPasswordLengthGlobal);
+    console.log(typeof userPasswordLengthGlobal);
+    console.log(`The user entry has now been converted into a ${typeof userPasswordLengthGlobal} which is accepted.`);
 
     if (userPasswordLengthGlobal >= 8 && userPasswordLengthGlobal <= 128) {
       console.log(`The user entry is between 8 and 128 so we can continue.`)
@@ -251,9 +260,11 @@ function generatePassword() {
 }
 
 // Get references to the #generate element
+
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
+
 function writePassword() {
 
   var password = generatePassword();
@@ -263,4 +274,5 @@ function writePassword() {
 }
 
 // Add event listener to generate button
+
 generateBtn.addEventListener('click', writePassword);
