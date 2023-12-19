@@ -10,10 +10,12 @@ var lowerCasedCharacters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k
 // Array of uppercase characters to be included in password
 var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-//  You can store the generatedPassword as a string and concat each character OR
-//  as an array and push each character, then join once you have enough characters
+// Global Variables for Char Options array and Generated Password
+
 var charOptions;
 var generatedPassword;
+
+// Global variable for User Password Length
 
 let userPasswordLengthGlobal = '';
 
@@ -24,65 +26,69 @@ function getPasswordOptions() {
 
   charOptions = [];
   generatedPassword = '';
-  console.clear();
 
-  // userPasswordLengthGlobal = '';
-  // console.log(`The user entry has now been reset to a ${typeof userPasswordLengthGlobal}.`);
+  // Clear the console
+  console.clear();
 
   // Prompt for password length
 
   var userPasswordLengthLocal = prompt(`Let's generate a password. Please input a number between 8 and 128.`);
 
-  if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`)
-    alert('Oops. Try again!');
-    getPasswordOptions()
+  // Conditional to confirm that the user input is a number when using the parseInt function. If false, move on to validate function, if true, move on to confirmRange function.
+
+  if (isNaN(parseInt(userPasswordLengthLocal))) {
+    validate();
+
+  } else if (!isNaN(parseInt(userPasswordLengthLocal))) {
+    confirmRange();
   }
 
-  var typedNumbers = function (userPasswordLengthLocal) {
-    return /^[0-9]*$/.test(userPasswordLengthLocal);
+  function validate() {
+
+    // Check if a user just presses enter or cancel without typing in a number and restart if true
+    if (!userPasswordLengthLocal || userPasswordLengthLocal === null) {
+      alert('Oops. Try again!');
+
+      // Reset input to empty string and restart function
+
+      userPasswordLengthLocal = ''
+      getPasswordOptions()
+    }
+
+    // Function to check if the user is actually typing numbers and not just letters
+
+    var typedNumbers = function (userPasswordLengthLocal) {
+      return /^[0-9]*$/.test(userPasswordLengthLocal);
+    }
+
+    // Conditional to check if the user has typed actual numbers and if not alert to try again, then restart the function. If numbers are typed then proceed to confirm range.
+
+    if (!typedNumbers(userPasswordLengthLocal)) {
+      alert(`You didn't type a number! Try again.`);
+      getPasswordOptions();
+    } else if (typedNumbers(userPasswordLengthLocal)) {
+      confirmRange();
+    }
+
   }
 
-  if (!typedNumbers(userPasswordLengthLocal)) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which is denied.`);
-    alert(`You didn't type a number! Try again.`);
-    getPasswordOptions();
-  } else if (typedNumbers(userPasswordLengthLocal)) {
-    console.log(`The user entered "${userPasswordLengthLocal}"`)
-    console.log(`The user entry is a type of ${typeof userPasswordLengthLocal} which needs to be converted.`);
+  // Function to confirm whether the user input is between 8 and 128 Characters. If true proceed, if not start again.
+
+  function confirmRange() {
 
     // Prompts store data as strings, so need to parse into a number
 
     userPasswordLengthGlobal = parseInt(userPasswordLengthLocal);
-    console.log(userPasswordLengthGlobal);
-    console.log(`The user entry has now been convererted into a ${typeof userPasswordLengthGlobal} which is accepted.`);
-  }
-
-  if (typeof userPasswordLengthGlobal === "number") {
-    confirmRange();
-  } else {
-    getPasswordOptions();
-  }
-
-  // At least 8 characters, no more than 128 characters
-  // Conditional to check that the number that was entered is in range
-
-  function confirmRange() {
 
     if (userPasswordLengthGlobal >= 8 && userPasswordLengthGlobal <= 128) {
-      console.log(`The user entry is between 8 and 128 so we can continue.`)
       confirmCharacterSets();
     } else {
-      console.log(`The user entry is not between 8 and 128 so they need to start again.`)
       alert('Needs to be between 8 and 128, please try again');
-      // If the user's input is out of range, either return out of the function or call the function again
       getPasswordOptions()
     }
   }
 
-  //  Prompt User for Character Sets
+  //  Function to confirm Character Sets
 
   function confirmCharacterSets() {
 
@@ -90,94 +96,75 @@ function getPasswordOptions() {
 
     var confirmSpecChars = confirm(`Do you want to use Special Characters in your Password? 
   
-  For example @ % + # $ etc`);
+For example @ % + # $ etc`);
+
+    // Conditional for if user wants Special Characters included or not. If true, add one random character to password, and add Special Characters array to Mega Char Options array. If not, no character is added and the array is left out of the mega array.
 
     if (!confirmSpecChars) {
-      console.log('Password has no Special Characters');
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('Password does not include Special Characters');
     } else {
       console.log('Password includes Special Characters');
       randomSpecCharInt = Math.floor(Math.random() * specialCharacters.length);
-      console.log(`Random Special Character Int: ${randomSpecCharInt}`);
       randomSpecChar = specialCharacters[randomSpecCharInt];
-      console.log(randomSpecChar);
       generatedPassword += randomSpecChar;
-      console.log(`The password so far is ${generatedPassword}`);
       charOptions = charOptions.concat(specialCharacters);
-      console.log(`The Character Options so far are ${charOptions}`);
       userPasswordLengthGlobal--;
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`)
-      console.log('----------------------------------------')
     }
 
     // Confirm if user wants to use Numbers
 
     var confirmNums = confirm(`Do you want to use Numbers in your Password?`);
 
+    // Conditional for if user wants Numbers included or not. If true, add one random character to password, and add Numbers array to Mega Char Options array. If not, no character is added and the array is left out of the mega array.
+
     if (!confirmNums) {
-      console.log('Password has no Numbers')
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('Password does not include Numbers')
     } else {
       console.log('Password includes Numbers');
       randomNumCharInt = Math.floor(Math.random() * numericCharacters.length);
-      console.log(`Random Number Int: ${randomNumCharInt}`);
       randomNumChar = numericCharacters[randomNumCharInt];
-      console.log(randomNumChar);
       generatedPassword += randomNumChar;
-      console.log(`The password so far is ${generatedPassword}`);
       charOptions = charOptions.concat(numericCharacters);
-      console.log(`The Character Options so far are ${charOptions}`);
       userPasswordLengthGlobal--;
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      console.log('----------------------------------------')
     }
 
     // Confirm if user wants to use Lower Case Characters
 
     var confirmLowerCase = confirm(`Do you want to use Lower Case Characters in your Password?`)
 
+    // Conditional for if user wants Lower Case Characters included or not. If true, add one random character to password, and add Lower Case Characters array to Mega Char Options array. If not, no character is added and the array is left out of the mega array.
+
     if (!confirmLowerCase) {
-      console.log('Password has no Lower Case characters');
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('Password does not include Lower Case characters');
     } else {
       console.log('Password includes Lower Case characters');
       randomLowerCaseCharInt = Math.floor(Math.random() * lowerCasedCharacters.length);
-      console.log(`Random Lower Case Int: ${randomLowerCaseCharInt}`);
       randomLowerCaseChar = lowerCasedCharacters[randomLowerCaseCharInt];
-      console.log(randomLowerCaseChar);
       generatedPassword += randomLowerCaseChar;
-      console.log(`The password so far is ${generatedPassword}`);
       charOptions = charOptions.concat(lowerCasedCharacters);
-      console.log(`The Character Options so far are ${charOptions}`);
       userPasswordLengthGlobal--;
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      console.log('----------------------------------------')
     }
 
     // Confirm if user wants to use Upper Case Characters
 
     var confirmUpperCase = confirm(`Do you want to use Upper Case Characters in your Password?`)
 
+    // Conditional for if user wants Upper Case Characters included or not. If true, add one random character to password, and add Upper Case Characters array to Mega Char Options array. If not, no character is added and the array is left out of the mega array.
+
     if (!confirmUpperCase) {
-      console.log('Password has no Upper Case characters');
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
+      console.log('Password does not include Upper Case characters');
     } else {
       console.log('Password includes Upper Case characters');
       randomUpperCaseCharInt = Math.floor(Math.random() * upperCasedCharacters.length);
-      console.log(`Random Upper Case Int: ${randomUpperCaseCharInt}`);
       randomUpperCaseChar = upperCasedCharacters[randomUpperCaseCharInt];
-      console.log(randomUpperCaseChar);
       generatedPassword += randomUpperCaseChar;
-      console.log(`The password so far is ${generatedPassword}`);
       charOptions = charOptions.concat(upperCasedCharacters);
-      console.log(`The Character Options so far are ${charOptions}`);
       userPasswordLengthGlobal--;
-      console.log(`The Remaining password characters are ${userPasswordLengthGlobal}`);
-      console.log('----------------------------------------')
     }
 
+    // Conditional for if no character sets are selected. If true, restart the Confirm Characters function.
+
     if (!confirmSpecChars && !confirmNums && !confirmLowerCase && !confirmUpperCase) {
-      console.log('User has not selected anything. They need to start again.');
       alert('You need to select at least one character set to proceed.')
       confirmCharacterSets();
     }
@@ -185,21 +172,19 @@ function getPasswordOptions() {
 
 }
 
-
-
-// TODO need an else statement for if no characters are selected and if so start the function over
-
-//  Then Either push selected character sets to a mega-array of all selected characters
+// Global Variable for Random Int to be used when adding characters to mega array
 
 var randomMegaIntGlobal;
 
 // Function for getting a random element from an array
+
 function getRandom(arr) {
 
-  //  Need a variable to hold the index that's being generated
-  //  Generate a random number
+  // Local Variable for Random Int
 
   var randomMegaIntLocal = Math.floor(Math.random() * arr.length);
+
+  // Assign Global variable with local variable value, then return value
 
   randomMegaIntGlobal = randomMegaIntLocal;
   return randomMegaIntGlobal;
@@ -207,6 +192,7 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
+
 function generatePassword() {
 
   getPasswordOptions();
@@ -215,12 +201,11 @@ function generatePassword() {
 
   for (let i = 0; i < userPasswordLengthGlobal; i++) {
 
-    getRandom(charOptions);
-    // console.log(`The Get Random result is ${getRandom(charOptions)}`)
+    // Call Get Random Function for each loop
 
-    // Add that character to the password
-    // That number is the index for a character in the mega-array
-    // So then, mega-array[generated-index] is the actual character
+    getRandom(charOptions);
+
+    // Add the Random item from the mega array to the end of the generated password
 
     generatedPassword += charOptions[randomMegaIntGlobal];
 
@@ -236,9 +221,11 @@ function generatePassword() {
 }
 
 // Get references to the #generate element
+
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
+
 function writePassword() {
 
   var password = generatePassword();
@@ -248,4 +235,5 @@ function writePassword() {
 }
 
 // Add event listener to generate button
+
 generateBtn.addEventListener('click', writePassword);
